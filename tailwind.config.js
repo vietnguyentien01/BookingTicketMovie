@@ -236,7 +236,13 @@ module.exports = {
       200: "2",
     },
     container: {
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
+      },
     },
     content: {
       none: "none",

@@ -1,0 +1,24 @@
+import axios from "axios";
+import { DOMAIN, TOKEN_CYBER } from "../../util/setting";
+import { SET_HE_THONG_RAP_CHIEU } from "../types/QuanLyRapType";
+
+export const QuanLyRapAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await axios({
+        url: `${DOMAIN}/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP03`,
+        method: "GET",
+        headers: {
+          TokenCybersoft: TOKEN_CYBER,
+        },
+      });
+      console.log("result", result.data.content);
+      dispatch({
+        type: SET_HE_THONG_RAP_CHIEU,
+        heThongRapChieu: result.data.content,
+      });
+    } catch (errors) {
+      console.log(errors.response?.data);
+    }
+  };
+};
