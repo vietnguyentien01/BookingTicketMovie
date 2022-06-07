@@ -1,9 +1,14 @@
 import { Fragment } from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
+import { USER_LOGIN } from "../../util/setting";
 
-const UserTemplate = (props) => {
+const CheckoutTemplate = (props) => {
   //path, exact, component
   const { Component, ...propsRoute } = props;
+
+  if (!localStorage.getItem(USER_LOGIN)) {
+    return <Redirect to="/login"></Redirect>;
+  }
 
   return (
     <Route
@@ -20,4 +25,4 @@ const UserTemplate = (props) => {
   );
 };
 
-export default UserTemplate;
+export default CheckoutTemplate;

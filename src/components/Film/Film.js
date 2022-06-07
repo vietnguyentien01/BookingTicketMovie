@@ -1,7 +1,6 @@
 import { Tabs } from "antd";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { history } from "../../App";
 
 export default function Film(props) {
   const { phim } = props;
@@ -32,11 +31,9 @@ export default function Film(props) {
             <span>{phim.moTa}</span>
           )}
         </p>
-        <div
+        <NavLink
+          to={`/detail/${phim.maPhim}`}
           className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition ease-in-out delay-100 duration-500 focus:-translate-y-1 focus:scale-110"
-          onClick={() => {
-            history.push(`/detail/${phim.maPhim}`);
-          }}
         >
           Đặt vé ngay
           <svg
@@ -51,7 +48,7 @@ export default function Film(props) {
               clipRule="evenodd"
             ></path>
           </svg>
-        </div>
+        </NavLink>
       </div>
     </div>
   );

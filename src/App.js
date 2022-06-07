@@ -1,7 +1,5 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createBrowserHistory } from "history";
-import { Switch } from "react-router-dom";
-import { Router } from "react-router-dom";
 import "./App.css";
 import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
@@ -10,6 +8,11 @@ import News from "./pages/News/News";
 import Register from "./pages/Register/Register";
 import { HomeTemplate } from "./templates/HomeTemplate/HomeTemplate";
 import Home from "./pages/Home/Home";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import Checkout from "./pages/Checkout/Checkout";
+import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate.js";
+import UserTemplate from "./templates/UserTemplate/UserTemplate";
 
 export const history = createBrowserHistory();
 
@@ -19,14 +22,19 @@ function App() {
       <Switch>
         <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
         <HomeTemplate path="/home" exact Component={Home}></HomeTemplate>
-        <HomeTemplate path="/login" exact Component={Login}></HomeTemplate>
         <HomeTemplate path="/contact" exact Component={Contact}></HomeTemplate>
+        <HomeTemplate path="/news" exact Component={News}></HomeTemplate>
         <HomeTemplate
           path="/detail/:id"
           exact
           Component={Detail}
         ></HomeTemplate>
-        <HomeTemplate path="/news" exact Component={News}></HomeTemplate>
+        <CheckoutTemplate
+          path="/checkout/:id"
+          exact
+          Component={Checkout}
+        ></CheckoutTemplate>
+        <UserTemplate path="/login" exact Component={Login}></UserTemplate>
         <HomeTemplate
           path="/register"
           exact
