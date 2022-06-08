@@ -1,6 +1,9 @@
 import { history } from "../../App";
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { DANG_NHAP, QUAN_LY_NGUOI_DUNG_DN } from "../types/QuanLyNguoiDungType";
+import {
+  DANG_NHAP,
+  SET_THONG_TIN_NGUOI_DUNG,
+} from "../types/QuanLyNguoiDungType";
 
 export const dangNhapAction = (thongtinDangNhap) => {
   return async (dispatch) => {
@@ -9,13 +12,12 @@ export const dangNhapAction = (thongtinDangNhap) => {
 
       if (result.data.statusCode === 200) {
         dispatch({
-          type: QUAN_LY_NGUOI_DUNG_DN,
-          thongtinDangNhap: result.data.content,
+          type: DANG_NHAP,
+          thongTinDangNhap: result.data.content,
         });
         //Chuyển hướng đăng nhập về trang trước đo
         history.back();
       }
-
       console.log("result", result);
     } catch (error) {
       console.log("error", error.response.data);
@@ -29,11 +31,11 @@ export const layThongTinNguoiDungAction = () => {
       const result = await quanLyNguoiDungService.layThongTinNguoiDung();
       if (result.data.statusCode === 200) {
         dispatch({
-          type: DANG_NHAP,
-          userData: result.data.content,
+          type: SET_THONG_TIN_NGUOI_DUNG,
+          thongTinNguoiDung: result.data.content,
         });
       }
-      console.log(result);
+      console.log("thongND", result);
     } catch (error) {
       console.log(error);
     }

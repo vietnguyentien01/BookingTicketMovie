@@ -1,0 +1,34 @@
+.ghe {
+    border: 1px solid rgb(61, 61, 61);
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+    margin: 1%;
+    color: #000;
+    border-radius: 5px;
+}
+
+.gheDaDat {
+    border: 1px solid rgb(56, 94, 232);
+    background: rgb(56, 94, 232);
+    color: #000;
+    cursor: no-drop !important;
+}
+
+.gheDangDat {
+    background: rgb(109, 238, 109);
+    border: 1px solid rgb(109, 238, 109);
+    color: #000;
+    cursor: pointer;
+}
+
+.gheVip {
+    color: #000;
+    background-color: rgb(218, 97, 27);
+}
+
+.gheDaDuocDat {
+    /* tự đặt */
+    color: #000;
+    background-color: rgb(220, 39, 180);
+}
