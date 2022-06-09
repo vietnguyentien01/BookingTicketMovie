@@ -1,122 +1,110 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Footer(props) {
+  const { heThongRapChieu } = useSelector((state) => state.QuanLyRapReducer);
+
   return (
-    <footer className="text-violet-600 bg-gray-300 body-font container">
+    <footer className="text-violet-600 bg-blue-300 body-font container">
       <div className="container px-5 py-24 mx-auto">
+        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+          Questions? Contact us.
+        </h2>
         <div className="flex flex-wrap md:text-left text-center -mb-10 -mx-4">
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
             <nav className="list-none mb-10">
               <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <img src="http://blockter.bdiakcml8h-e92498n216kr.p.runcloud.link/wp-content/uploads/2018/02/logo.png"></img>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
             <nav className="list-none mb-10">
               <li>
                 <a className="text-gray-600 hover:text-gray-800">First Link</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Investor Relations
+                </a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                <a className="text-gray-600 hover:text-gray-800">Privacy</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <a className="text-gray-600 hover:text-gray-800">Speed Test</a>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
             <nav className="list-none mb-10">
               <li>
                 <a className="text-gray-600 hover:text-gray-800">First Link</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Investor Relations
+                </a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                <a className="text-gray-600 hover:text-gray-800">Privacy</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <a className="text-gray-600 hover:text-gray-800">Speed Test</a>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
             <nav className="list-none mb-10">
               <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
+                <a className="text-gray-600 hover:text-gray-800">Account</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Ways to Watch
+                </a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Corporate Information
+                </a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Only on Blockter
+                </a>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
             <nav className="list-none mb-10">
               <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Media Center
+                </a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                <a className="text-gray-600 hover:text-gray-800">
+                  Terms of Use
+                </a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <a className="text-gray-600 hover:text-gray-800">Contact Us</a>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-              </li>
+            <nav className="list-none mb-10 flex flex-row flex-wrap gap-5">
+              {heThongRapChieu?.map((item, index) => {
+                return (
+                  <li key={index} className="w-12 h-w-12">
+                    <img
+                      src={item.logo}
+                      className="text-gray-600 hover:text-gray-800"
+                    ></img>
+                  </li>
+                );
+              })}
             </nav>
           </div>
         </div>
@@ -142,9 +130,8 @@ export default function Footer(props) {
               Button
             </button>
             <p className="text-gray-500 text-sm md:ml-6 md:mt-0 mt-2 sm:text-left text-center">
-              Bitters chicharrones fanny pack
-              <br className="lg:block hidden" />
-              waistcoat green juice
+              Ready to watch? Enter your email to create or restart your
+              membership.
             </p>
           </div>
           <span className="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
@@ -209,7 +196,7 @@ export default function Footer(props) {
       <div className="bg-gray-100">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-500 text-sm text-center sm:text-left">
-            © 2020 Tailblocks —
+            © 2022 blockter —
             <a
               href="https://twitter.com/knyttneve"
               className="text-gray-600 ml-1"
