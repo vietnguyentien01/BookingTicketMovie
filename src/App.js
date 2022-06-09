@@ -13,6 +13,7 @@ import { Switch } from "react-router-dom";
 import Checkout from "./pages/Checkout/Checkout";
 import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate.js";
 import UserTemplate from "./templates/UserTemplate/UserTemplate";
+import Profile from "./pages/Profile/Profile";
 
 export const history = createBrowserHistory();
 
@@ -40,6 +41,7 @@ function App() {
           exact
           component={Register}
         ></HomeTemplate>
+        <HomeTemplate path="/profile" exact component={Profile}></HomeTemplate>
       </Switch>
     </Router>
   );

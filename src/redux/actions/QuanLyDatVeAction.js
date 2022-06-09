@@ -1,6 +1,7 @@
 import { quanLyDatVeService } from "../../services/QuanLyDatVeService";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 import { SET_CHI_TIET_PHONG_VE } from "../types/QuanLyDatVeType";
+import Swal from "sweetalert2";
 
 export const layChiTietPhongVeAction = (maLichChieu) => {
   return async (dispacth) => {
@@ -25,6 +26,18 @@ export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
     try {
       const result = await quanLyDatVeService.datVe(thongTinDatVe);
       console.log("resultDatVe", result.data.content);
+      if (result.status === 200) {
+        let timerInterval;
+        await Swal.fire({
+          title: "Đặt vé thành công",
+          html: "Chúc bạn xem phim vui vẻ nhé!",
+          timer: 10000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        });
+      }
     } catch (error) {
       console.log(error.response.data);
     }

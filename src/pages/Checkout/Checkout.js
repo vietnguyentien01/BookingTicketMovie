@@ -9,12 +9,20 @@ import "./Checkout.css";
 import {
   CheckCircleOutlined,
   CheckOutlined,
+  HomeOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { DAT_GHE } from "../../redux/types/QuanLyDatVeType";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
-import { Tabs } from "antd";
+import { Button, Tabs } from "antd";
 import { layThongTinNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
+import { NavLink } from "react-router-dom";
+import { sortBy, isEmpty } from "lodash";
+import Swal from "sweetalert2";
+import _ from "lodash";
+import { history } from "../../App";
+import { TOKEN_CYBER, USER_LOGIN } from "../../util/setting";
+
 const { TabPane } = Tabs;
 
 function Checkout(props) {
@@ -65,7 +73,7 @@ function Checkout(props) {
             }}
             disabled={ghe.daDat}
             key={index}
-            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} `}
+            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat}  `}
           >
             {ghe.daDat ? (
               classGheDaDuocDat !== "" ? (
@@ -171,7 +179,7 @@ function Checkout(props) {
               Địa điểm: {thongTinPhim.tenCumRap} - {thongTinPhim.diaChi}
             </p>
             <p>
-              Ngày chiếu: {thongTinPhim.ngayChieu} - {thongTinPhim.gioChieu} -{" "}
+              Ngày chiếu: {thongTinPhim.ngayChieu} - {thongTinPhim.gioChieu} -
               {thongTinPhim.tenRap}
             </p>
           </div>
@@ -220,9 +228,17 @@ function Checkout(props) {
                 thongTinDatVe.maLichChieu = props.match.params.id;
                 thongTinDatVe.danhSachVe = danhSachGheDangDat;
 
-                console.log(thongTinDatVe);
+                if (_.isEmpty(danhSachGheDangDat)) {
+                  Swal.fire({
+                    title: "Chọn tối thiểu 1 ghế để đặt vé",
+                    icon: "error",
+                    confirmButtonText: "Đã hiểu",
+                  });
+                } else {
+                  dispacth(datVeAction(thongTinDatVe));
+                }
 
-                dispacth(datVeAction(thongTinDatVe));
+                console.log(thongTinDatVe);
               }}
             >
               ĐẶT VÉ
@@ -236,14 +252,58 @@ function Checkout(props) {
 
 const callback = (key) => {};
 export default function CheckoutTab(props) {
+  const dispacth = useDispatch();
+
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+  const operations = (
+    <Fragment>
+      {!isEmpty(userLogin) ? (
+        <div className="flex flex-row">
+          <NavLink
+            to="/profile"
+            className="btn btn-danger mr-2 rounded-sm bg-blue-300 text-white hover:text-black p-3 mb-2"
+          >
+            {userLogin.taiKhoan}
+          </NavLink>
+          <NavLink
+            to="/login"
+            className="btn btn-danger text-red-500 p-3 mb-2"
+            onClick={() => {
+              return localStorage.removeItem(USER_LOGIN, TOKEN_CYBER);
+            }}
+          >
+            Đăng xuất
+          </NavLink>
+        </div>
+      ) : (
+        " "
+      )}
+    </Fragment>
+  );
+
   return (
     <div className="p-4">
-      <Tabs defaultActiveKey="1" onChange={callback}>
+      <Tabs
+        tabBarExtraContent={operations}
+        defaultActiveKey="1"
+        onChange={callback}
+      >
         <TabPane tab="01 CHỌN GHẾ VÀ THANH TOÁN" key="1">
+          <Button type="primary">
+            <NavLink to="/" className="flex flex-row text-xl">
+              <HomeOutlined />
+            </NavLink>
+          </Button>
           <Checkout {...props}></Checkout>
         </TabPane>
         <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
+          <Button type="primary">
+            <NavLink to="/" className="flex flex-row text-xl">
+              <HomeOutlined />
+            </NavLink>
+          </Button>
+
           <KetQuaDatVe {...props}></KetQuaDatVe>
         </TabPane>
       </Tabs>
@@ -252,40 +312,22 @@ export default function CheckoutTab(props) {
 }
 
 function KetQuaDatVe(props) {
-  const { thongTinNguoiDung } = useSelector(
-    (state) => state.QuanLyNguoiDungReducer
+  // const { userData } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+  const { chiTietPhongVe, danhSachGheDangDat } = useSelector(
+    (state) => state.QuanLyDatVeReducer
   );
 
-  const dispacth = useDispatch();
+  console.log("userLogin", userLogin);
+  const dispacth = useDispatch(props.match.params.id);
 
   useEffect(() => {
     const action = layThongTinNguoiDungAction();
     dispacth(action);
   }, []);
 
-  console.log("ThongTinNguoiDung", thongTinNguoiDung);
-
-  const renderTicketItem = function () {
-    return thongTinNguoiDung.thongTinDatVe?.map(() => {
-      return (
-        <div className="container">
-          <section className="text-gray-600 body-font">
-            <div className="container px-5 py-24 mx-auto">
-              <div className="flex flex-col text-center w-full mb-20">
-                <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-                  Lịch sử đặt vé
-                </h1>
-                <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                  Thông tin chi tiết
-                </p>
-              </div>
-              {renderTicketItem()}
-            </div>
-          </section>
-        </div>
-      );
-    });
-  };
+  const { thongTinPhim } = chiTietPhongVe;
 
   return (
     <div className="container">
@@ -299,7 +341,41 @@ function KetQuaDatVe(props) {
               Thông tin chi tiết
             </p>
           </div>
-          {renderTicketItem()}
+          <div className="flex flex-wrap -m-2">
+            <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
+              <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                <img
+                  alt="team"
+                  className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                  src={thongTinPhim.hinhAnh}
+                />
+                <div className="flex-grow">
+                  <h2 className="text-gray-900 title-font font-medium">
+                    Tên phim: {thongTinPhim.tenPhim}
+                  </h2>
+                  <p className="text-gray-500">
+                    Địa chỉ: {thongTinPhim.diaChi}
+                  </p>
+                  <p className="text-gray-500">
+                    Rạp: {thongTinPhim.tenCumRap} - {thongTinPhim.tenRap}
+                  </p>
+                  <p className="text-gray-500">
+                    Giờ chiếu: {thongTinPhim.gioChieu}
+                  </p>
+                  <p className="text-gray-500">
+                    Ghế số:
+                    {sortBy(danhSachGheDangDat, ["stt"]).map((gheDD, index) => {
+                      return (
+                        <span key={index} className="ml-1 text-gray-500">
+                          {gheDD.stt}
+                        </span>
+                      );
+                    })}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

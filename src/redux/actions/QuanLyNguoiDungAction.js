@@ -1,7 +1,7 @@
 import { history } from "../../App";
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
 import {
-  DANG_NHAP,
+  QUAN_LY_NGUOI_DUNG_DN,
   SET_THONG_TIN_NGUOI_DUNG,
 } from "../types/QuanLyNguoiDungType";
 
@@ -12,7 +12,7 @@ export const dangNhapAction = (thongtinDangNhap) => {
 
       if (result.data.statusCode === 200) {
         dispatch({
-          type: DANG_NHAP,
+          type: QUAN_LY_NGUOI_DUNG_DN,
           thongTinDangNhap: result.data.content,
         });
         //Chuyển hướng đăng nhập về trang trước đo
@@ -32,7 +32,7 @@ export const layThongTinNguoiDungAction = () => {
       if (result.data.statusCode === 200) {
         dispatch({
           type: SET_THONG_TIN_NGUOI_DUNG,
-          thongTinNguoiDung: result.data.content,
+          userData: result.data.content,
         });
       }
       console.log("thongND", result);

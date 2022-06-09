@@ -1,9 +1,62 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { Select } from "antd";
+import _ from "lodash";
+
+// Hook đa ngôn ngữ
+import { useTranslation } from "react-i18next";
+import { TOKEN_CYBER, USER_LOGIN } from "../../../../util/setting";
+
+const { Option } = Select;
+
+const handleChange = (value: string) => {
+  console.log(`selected ${value}`);
+};
 
 export default function Header(props) {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+  const { t, i18n } = useTranslation();
+
+  const handleChange = (value) => {
+    i18n.changeLanguage(value);
+  };
+
+  const renderLogin = () => {
+    if (_.isEmpty(userLogin)) {
+      return (
+        <Fragment>
+          <NavLink to="/login" className="self-center px-8 py-3 rounded">
+            {t("signin")}
+          </NavLink>
+          <NavLink
+            to="/register"
+            className="self-center px-8 py-3 font-semibold rounded bg-violet-400 text-gray-900"
+          >
+            {t("signup")}
+          </NavLink>
+        </Fragment>
+      );
+    }
+
+    return (
+      <Fragment>
+        <NavLink to="/profile" className="self-center px-8 py-3 rounded">
+          {userLogin.taiKhoan}
+        </NavLink>
+        <NavLink
+          to="/login"
+          className="btn btn-danger text-red-500 p-3 mb-2"
+          onClick={() => {
+            return localStorage.removeItem(USER_LOGIN, TOKEN_CYBER);
+          }}
+        >
+          Đăng xuất
+        </NavLink>
+      </Fragment>
+    );
+  };
 
   return (
     <header className="p-4 bg-black bg-opacity-50 text-gray-100 fixed w-full z-10">
@@ -42,15 +95,16 @@ export default function Header(props) {
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
-          <NavLink to="/login" className="self-center px-8 py-3 rounded">
-            Đăng nhập
-          </NavLink>
-          <NavLink
-            to="/register"
-            className="self-center px-8 py-3 font-semibold rounded bg-violet-400 text-gray-900"
+          {renderLogin()}
+          <Select
+            defaultValue="vn"
+            style={{ width: 120, marginLeft: "10px", padding: 10 }}
+            onChange={handleChange}
           >
-            Đăng ký
-          </NavLink>
+            <Option value="vn">Viet Nam</Option>
+            <Option value="jap">Japan</Option>
+            <Option value="en">English</Option>
+          </Select>
         </div>
         <button className="p-4 lg:hidden">
           <svg

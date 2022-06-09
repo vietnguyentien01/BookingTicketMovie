@@ -1,6 +1,6 @@
 import { TOKEN_CYBER, USER_LOGIN } from "../../util/setting";
 import {
-  DANG_NHAP,
+  QUAN_LY_NGUOI_DUNG_DN,
   SET_THONG_TIN_NGUOI_DUNG,
 } from "../types/QuanLyNguoiDungType";
 
@@ -11,12 +11,12 @@ if (localStorage.getItem(USER_LOGIN)) {
 
 const stateDefault = {
   userLogin: user,
-  thongTinNguoiDung: {},
+  userData: {},
 };
 
 export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
   switch (action.type) {
-    case DANG_NHAP: {
+    case QUAN_LY_NGUOI_DUNG_DN: {
       const { thongTinDangNhap } = action;
 
       localStorage.setItem(USER_LOGIN, JSON.stringify(thongTinDangNhap));
@@ -24,7 +24,7 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
       return { ...state, userLogin: thongTinDangNhap };
     }
     case SET_THONG_TIN_NGUOI_DUNG: {
-      state.thongTinNguoiDung = action.thongTinNguoiDung;
+      state.userData = action.userData;
       return { ...state };
     }
     default: {

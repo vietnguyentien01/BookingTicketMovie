@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DOMAIN, TOKEN_ACCESS, TOKEN_CYBER } from "../util/setting";
+import { DOMAIN } from "../util/setting";
 import { header } from "./HeaderService";
 
 export class baseService {
